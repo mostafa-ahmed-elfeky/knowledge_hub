@@ -32,7 +32,6 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity<List<CourseDto>> getAllCourses() {
-        logger.info("************** list courses");
         List<CourseDto> courses = courseService.getAllCourses();
         return ResponseEntity.ok(courses);
     }
@@ -44,6 +43,7 @@ public class CourseController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('INSTRUCTOR')")
     public ResponseEntity<CourseDto> createCourse(@Valid @RequestBody CourseDto course)
         throws URISyntaxException {
         CourseDto newCourse = courseService.createCourse(course);
@@ -60,6 +60,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('INSTRUCTOR')")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build();

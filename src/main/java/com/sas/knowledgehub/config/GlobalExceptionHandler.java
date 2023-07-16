@@ -4,7 +4,6 @@ import com.sas.knowledgehub.data.constants.ErrorCode;
 import com.sas.knowledgehub.data.dto.response.AppResponse;
 import com.sas.knowledgehub.data.dto.response.ErrorResponse;
 import java.time.LocalDateTime;
-import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,16 +26,6 @@ public class GlobalExceptionHandler {
         );
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<Object> handleException(Exception ex) {
-//
-//        var errors = List.of(new ErrorResponse(ErrorCode.GENERAL_ERROR));
-//
-//        return new ResponseEntity<>(
-//            new AppResponse<>(errors, LocalDateTime.now(), getStackTraceAsString(ex)),
-//            HttpStatus.INTERNAL_SERVER_ERROR
-//        );
-//    }
 
     public static String getStackTraceAsString(Exception exception) {
         StringBuilder stackTrace = new StringBuilder();
