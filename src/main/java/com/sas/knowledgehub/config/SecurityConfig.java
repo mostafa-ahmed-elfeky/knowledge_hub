@@ -20,6 +20,9 @@ class SecurityConfig {
 
     private final JwtAuthConverter jwtAuthConverter;
 
+    private static final String[] SWAGGER_PATHS = {"/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/webjars/swagger-ui/**"};
+
+
     @Bean
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
@@ -30,8 +33,9 @@ class SecurityConfig {
         http.
             csrf().disable()
             .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
+            .requestMatchers(SWAGGER_PATHS).permitAll()
+            .anyRequest()
+            .authenticated();
 
         http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthConverter);
 
