@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,12 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping("/courses")
 public class CourseController {
+    private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
+
 
     private final CourseService courseService;
 
 
     @GetMapping
     public ResponseEntity<List<CourseDto>> getAllCourses() {
+        logger.info("************** list courses");
         List<CourseDto> courses = courseService.getAllCourses();
         return ResponseEntity.ok(courses);
     }

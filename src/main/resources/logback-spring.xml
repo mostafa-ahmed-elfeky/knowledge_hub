@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+	<property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr([s:%X{sessionId}]){magenta} %clr(%5p): %clr(%-40.40logger{5}){cyan} %m%n%red(%ex)"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+	<appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>C:/Users/mostafa.ahmed/Data/Traianing/logs/knowledge-hub/knowledge-hub.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>C:/Users/mostafa.ahmed/Data/Traianing/logs/knowledge-hub/knowledge-hub-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>20MB</maxFileSize>
+			<maxHistory>90</maxHistory> <!--Archive files for 90 days, older files will be deleted-->
+			<totalSizeCap>5000MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="RollingFile" />
+		<appender-ref ref="Console" />
+	</root>
+
+</Configuration>
